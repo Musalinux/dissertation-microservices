@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 services:
   user-service:
     build: ./UserService
@@ -8,4 +8,11 @@ services:
     build: ./ProductService
     ports:
       - "5002:5000"
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - user-service
+      - product-service
 
