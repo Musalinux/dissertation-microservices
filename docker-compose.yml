@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  user-service:
+    build: ./UserService
+    ports:
+      - "5001:5000"
+  product-service:
+    build: ./ProductService
+    ports:
+      - "5002:5000"
+
