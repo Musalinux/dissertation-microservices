@@ -4,10 +4,16 @@ services:
     build: ./UserService
     ports:
       - "5001:5000"
+    networks:
+      - microservices
+
   product-service:
     build: ./ProductService
     ports:
       - "5002:5000"
+    networks:
+      - microservices
+
   frontend:
     build: ./frontend
     ports:
@@ -15,4 +21,8 @@ services:
     depends_on:
       - user-service
       - product-service
+    networks:
+      - microservices
 
+networks:
+  microservices:

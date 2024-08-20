@@ -1,14 +1,14 @@
-# Use the official lightweight Node.js 14 image.
+# Use the official Node.js 14 image from Docker Hub
 FROM node:14-slim
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json and package-lock.json for dependency installation
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install --verbose
+# Install production dependencies.
+RUN npm install && npm cache clean --force
 
 # Copy the local code to the container's workspace.
 COPY public/ public/

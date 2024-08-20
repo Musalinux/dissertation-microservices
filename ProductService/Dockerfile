@@ -1,7 +1,7 @@
 FROM python:3.8-slim
 WORKDIR /app
-COPY . /app
-RUN pip install --trusted-host pypi.python.org Flask pymongo
+COPY . .
+RUN pip install Flask flask_cors
 EXPOSE 5000
 CMD ["python", "app.py"]
 

@@ -1,27 +1,39 @@
 import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 function App() {
-  const [userServiceResponse, setUserServiceResponse] = useState('');
-  const [productServiceResponse, setProductServiceResponse] = useState('');
+  const [products, setProducts] = useState([]);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
-    axios.get('http://localhost:5001').then(response => {
-      setUserServiceResponse(response.data);
-    });
-    axios.get('http://localhost:5002').then(response => {
-      setProductServiceResponse(response.data);
-    });
+    // Fetch user information
+    axios.get('http://localhost:5001/users/1')
+      .then(response => setUser(response.data))
+      .catch(err => console.error('Error fetching user:', err));
+
+    // Fetch products
+    axios.get('http://localhost:5002/products')
+      .then(response => setProducts(response.data))
+      .catch(err => console.error('Error fetching products:', err));
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>User Service Response: {userServiceResponse}</p>
-        <p>Product Service Response: {productServiceResponse}</p>
-      </header>
+    <div>
+      <h1>User Information</h1>
+      <p>Name: {user.name || "Loading..."}</p>
+      <p>Email: {user.email || "Loading..."}</p>
+
+      <h1>Products</h1>
+      {products.length ? products.map(product => (
+        <div key={product.id}>
+          <h2>{product.name}</h2>
+          <p>${product.price}</p>
+        </div>
+      )) : "Loading products..."}
     </div>
   );
 }
 
-export default App;
+ReactDOM.render(<App />, document.getElementById('root'));
+
