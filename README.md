@@ -4,5 +4,5 @@ Custom Microservice for my dissertation
 Topic - Securing Microservices in Cloud Containers. 
 
 ## Microservices: 
-Product microservice
-User microservice
+- Product microservice
+- User microservice

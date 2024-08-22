@@ -8,12 +8,12 @@ function App() {
 
   useEffect(() => {
     // Fetch user information
-    axios.get('http://user-service:5001/users/1')
+    axios.get('http://user-service:5000/users/1')
       .then(response => setUser(response.data))
       .catch(err => console.error('Error fetching user:', err));
 
     // Fetch products
-    axios.get('http://product-service:5002/products')
+    axios.get('http://product-service:5000/products')
       .then(response => setProducts(response.data))
       .catch(err => console.error('Error fetching products:', err));
   }, []);
