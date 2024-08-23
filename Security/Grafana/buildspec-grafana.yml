@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging into Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region us-east-1)
+  build:
+    commands:
+      - echo Building the Grafana Docker image...
+      - cd Security/Grafana
+      - docker build -t $REPOSITORY_URI/grafana:latest .
+  post_build:
+    commands:
+      - echo Pushing the Docker image...
+      - docker push $REPOSITORY_URI/grafana:latest
+      - printf '[{"name":"grafana","imageUri":"%s"}]' $REPOSITORY_URI/grafana:latest > imagedefinitions.json
+
+artifacts:
+    files: imagedefinitions.json
+

@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging into Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region us-east-1)
+  build:
+    commands:
+      - echo Building the ELK Docker image...
+      - cd Security/ELK
+      - docker build -t $REPOSITORY_URI/elk:latest .
+  post_build:
+    commands:
+      - echo Pushing the Docker image...
+      - docker push $REPOSITORY_URI/elk:latest
+      - printf '[{"name":"elk","imageUri":"%s"}]' $REPOSITORY_URI/elk:latest > imagedefinitions.json
+
+artifacts:
+    files: imagedefinitions.json
+

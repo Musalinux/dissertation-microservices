@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging into Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region us-east-1)
+  build:
+    commands:
+      - echo Building the Prometheus Docker image...
+      - cd Security/Prometheus
+      - docker build -t $REPOSITORY_URI/prometheus:latest .
+  post_build:
+    commands:
+      - echo Pushing the Docker image...
+      - docker push $REPOSITORY_URI/prometheus:latest
+      - printf '[{"name":"prometheus","imageUri":"%s"}]' $REPOSITORY_URI/prometheus:latest > imagedefinitions.json
+
+artifacts:
+    files: imagedefinitions.json
+
