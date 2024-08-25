@@ -1,36 +1,78 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, TextField, Button } from '@material-ui/core';
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [user, setUser] = useState({});
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    // Fetch user information
-    axios.get('http://user-service.DissertationMicroservices:5000/users/1')
+    axios.get('http://product-service.DissertationMicroservices/products')
+      .then(response => {
+        setProducts(response.data);
+        setFilteredProducts(response.data);
+      })
+      .catch(err => console.error('Error fetching products:', err));
+
+    axios.get('http://user-service.DissertationMicroservices/users/1')
       .then(response => setUser(response.data))
       .catch(err => console.error('Error fetching user:', err));
-
-    // Fetch products
-    axios.get('http://product-service.DissertationMicroservices:5000/products')
-      .then(response => setProducts(response.data))
-      .catch(err => console.error('Error fetching products:', err));
   }, []);
 
-  return (
-    <div>
-      <h1>User Information</h1>
-      <p>Name: {user.name || "Loading..."}</p>
-      <p>Email: {user.email || "Loading..."}</p>
+  const handleSearch = () => {
+    if (!searchTerm) {
+      setFilteredProducts(products); // If no search term, show all products
+    } else {
+      const filtered = products.filter(product => 
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredProducts(filtered);
+    }
+  };
 
-      <h1>Products</h1>
-      {products.length ? products.map(product => (
-        <div key={product.id}>
-          <h2>{product.name}</h2>
-          <p>${product.price}</p>
-        </div>
-      )) : "Loading products..."}
+  return (
+    <div style={{ margin: 20 }}>
+      <Typography variant="h4">Welcome, {user.name || "Loading..."}</Typography>
+      <TextField
+        label="Search for products"
+        variant="outlined"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        style={{ marginRight: 10 }}
+      />
+      <Button variant="contained" color="primary" onClick={handleSearch}>
+        Search
+      </Button>
+      <Grid container spacing={4} style={{ marginTop: 20 }}>
+        {filteredProducts.map(product => (
+          <Grid item key={product.id} xs={12} sm={6} md={4}>
+            <Card>
+              <CardActionArea>
+                <CardMedia
+                  style={{ height: 140 }}
+                  image={product.image}
+                  title={product.name}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    {product.name}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    {product.description || "No description available."}
+                  </Typography>
+                  <Typography variant="body1">
+                    ${product.price}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 }

@@ -9,7 +9,7 @@ COPY package*.json ./
 
 # Install production dependencies.
 RUN npm install && npm cache clean --force
-
+RUN npm install @material-ui/core
 # Copy the local code to the container's workspace.
 COPY public/ public/
 COPY src/ src/
