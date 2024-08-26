@@ -10,14 +10,14 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    axios.get('http://product-service.DissertationMicroservices/products')
+    axios.get('http://172.31.25.167/products')
       .then(response => {
         setProducts(response.data);
         setFilteredProducts(response.data);
       })
       .catch(err => console.error('Error fetching products:', err));
 
-    axios.get('http://user-service.DissertationMicroservices/users/1')
+    axios.get('http://172.31.81.7/users/1')
       .then(response => setUser(response.data))
       .catch(err => console.error('Error fetching user:', err));
   }, []);
