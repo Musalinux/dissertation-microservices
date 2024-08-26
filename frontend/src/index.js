@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, TextField, Button } from '@material-ui/core';
 
+axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
+
 function App() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -10,14 +12,14 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    axios.get('http://172.31.25.167/products')
+    axios.get('http://http://product-service.dissertationmicroservices/products')
       .then(response => {
         setProducts(response.data);
         setFilteredProducts(response.data);
       })
       .catch(err => console.error('Error fetching products:', err));
 
-    axios.get('http://172.31.81.7/users/1')
+    axios.get('http://user-service.dissertationmicroservices/users/1')
       .then(response => setUser(response.data))
       .catch(err => console.error('Error fetching user:', err));
   }, []);
