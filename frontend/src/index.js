@@ -11,7 +11,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    axios.get('http://http://product-service.dissertationmicroservices/products')
+    axios.get('http://product-service.dissertationmicroservices/products')
       .then(response => {
         setProducts(response.data);
         setFilteredProducts(response.data);
