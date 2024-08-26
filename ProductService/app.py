@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app)
 
 products = [
     {"id": 1, "name": "RPI", "price": 999.99, "image": "https://dissertation-images-654654166286.s3.amazonaws.com/rpi.jpg", "description": "RPI"},

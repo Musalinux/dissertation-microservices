@@ -1,5 +1,3 @@
-
-
 from flask import Flask, jsonify
 from flask_cors import CORS
 
@@ -7,8 +5,8 @@ app = Flask(__name__)
 CORS(app)
 
 users = {
-    "1": {"id": 1, "name": "John Doe", "email": "john@example.com"},
-    "2": {"id": 2, "name": "Jane Doe", "email": "jane@example.com"}
+    "1": {"id": 1, "name": "Musaddik Vasaikar", "email": "musaddik@microservices.com"},
+    "2": {"id": 2, "name": "Docker", "email": "docker@kubernetes.com"}
 }
 
 @app.route('/users/<user_id>', methods=['GET'])
