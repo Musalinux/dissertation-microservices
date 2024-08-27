@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, TextField, Button } from '@material-ui/core';
 
-
 function App() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -25,9 +24,9 @@ function App() {
 
   const handleSearch = () => {
     if (!searchTerm) {
-      setFilteredProducts(products); // If no search term, show all products
+      setFilteredProducts(products);
     } else {
-      const filtered = products.filter(product => 
+      const filtered = products.filter(product =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.description.toLowerCase().includes(searchTerm.toLowerCase())
       );
@@ -37,13 +36,18 @@ function App() {
 
   return (
     <div style={{ margin: 20 }}>
+      <Typography variant="h2">My first microservice app</Typography>
+      <Typography paragraph>
+        This application utilizes React, Material-UI, and AWS microservices including ECS, ALB, and more.
+      </Typography>
+      <a href="https://github.com/Musalinux/dissertation-microservices" target="_blank" rel="noopener noreferrer">View the entire source code here on GitHub</a>
       <Typography variant="h4">Welcome, {user.name || "Loading..."}</Typography>
       <TextField
         label="Search for products"
         variant="outlined"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        style={{ marginRight: 10 }}
+        style={{ marginRight: 10, width: '300px' }}
       />
       <Button variant="contained" color="primary" onClick={handleSearch}>
         Search
@@ -54,7 +58,7 @@ function App() {
             <Card>
               <CardActionArea>
                 <CardMedia
-                  style={{ height: 140 }}
+                  style={{ height: 140, objectFit: 'cover' }} // CSS properties for better image fit
                   image={product.image}
                   title={product.name}
                 />
