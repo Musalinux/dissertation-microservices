@@ -10,10 +10,10 @@ products = [
     {"id": 3, "name": "Wifi", "price": 250, "image": "https://dissertation-images-654654166286.s3.amazonaws.com/wifi.jpg", "description": "WiFi Hacking Device"},
     {"id": 4, "name": "Bluetooth Device", "price": 5000, "image": "https://dissertation-images-654654166286.s3.amazonaws.com/bt.jpg", "description": "Bluetooth 2.0 Device"},
     {"id": 5, "name": "Mic", "price": 2350, "image": "https://dissertation-images-654654166286.s3.amazonaws.com/micjpg.jpg", "description": "Malicious Mic"},
-    {"id": 5, "name": "Wifi upgraded", "price": 4250, "image": "https://dissertation-images-654654166286.s3.amazonaws.com/wifi2.jpg", "description": "WiFi 2.0 Enhanced Device"},
-    {"id": 6, "name": "Rubber Ducky", "price": 1350, "image": "https://dissertation-images-654654166286.s3.amazonaws.com/rubber.jpg", "description": "Rubber Ducky for password stealing"},
-    {"id": 7, "name": "SDR", "price": 4000, "image": "https://dissertation-images-654654166286.s3.amazonaws.com/sdr.jpg", "description": "SDR Device for frequency manipulation"},
-    {"id": 8, "name": "Bad USB", "price": 3700, "image": "https://dissertation-images-654654166286.s3.amazonaws.com/badusb.jpg", "description": "Bad USB for corrupting devices"}
+    {"id": 6, "name": "Wifi upgraded", "price": 4250, "image": "https://dissertation-images-654654166286.s3.amazonaws.com/wifi2.jpg", "description": "WiFi 2.0 Enhanced Device"},
+    {"id": 7, "name": "Rubber Ducky", "price": 1350, "image": "https://dissertation-images-654654166286.s3.amazonaws.com/rubber.jpg", "description": "Rubber Ducky for password stealing"},
+    {"id": 8, "name": "SDR", "price": 4000, "image": "https://dissertation-images-654654166286.s3.amazonaws.com/sdr.jpg", "description": "SDR Device for frequency manipulation"},
+    {"id": 9, "name": "Bad USB", "price": 3700, "image": "https://dissertation-images-654654166286.s3.amazonaws.com/badusb.jpg", "description": "Bad USB for corrupting devices"}
 ]
 
 @app.route('/products', methods=['GET'])

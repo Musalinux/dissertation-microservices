@@ -18,7 +18,7 @@ function App() {
       })
       .catch(err => console.error('Error fetching products:', err));
 
-    axios.get('http://ALB-1093928761.us-east-1.elb.amazonaws.com:6000/users/1')
+    axios.get('http://ALB-1093928761.us-east-1.elb.amazonaws.com:5005/users/1')
       .then(response => setUser(response.data))
       .catch(err => console.error('Error fetching user:', err));
   }, []);
