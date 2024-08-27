@@ -40,7 +40,10 @@ function App() {
       <Typography paragraph>
         This application utilizes React, Material-UI, and AWS microservices including ECS, ALB, and more.
       </Typography>
-      <a href="https://github.com/Musalinux/dissertation-microservices" target="_blank" rel="noopener noreferrer">View the entire source code here on GitHub</a>
+      <Typography paragraph>
+        This simple web-app has 3 microservices - Frontend, user service, and product service. 
+      </Typography>
+      <a href="https://github.com/Musalinux/dissertation-microservices" target="_blank" rel="noopener noreferrer">View the entire source code here on GitHub</a> <br>
       <Typography variant="h4">Welcome, {user.name || "Loading..."}</Typography>
       <TextField
         label="Search for products"
