@@ -11,14 +11,14 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    axios.get('http://product-service.dissertationmicroservices/products')
+    axios.get('http://ALB-1093928761.us-east-1.elb.amazonaws.com:5000/products')
       .then(response => {
         setProducts(response.data);
         setFilteredProducts(response.data);
       })
       .catch(err => console.error('Error fetching products:', err));
 
-    axios.get('http://user-service.dissertationmicroservices/users/1')
+    axios.get('http://ALB-1093928761.us-east-1.elb.amazonaws.com:6000/users/1')
       .then(response => setUser(response.data))
       .catch(err => console.error('Error fetching user:', err));
   }, []);
